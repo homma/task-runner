@@ -21,13 +21,20 @@ task_c() {
 
 # format
 task_f() {
-  format_swift
+  format_shell $@
 }
 
 format_swift() {
   echo "formating swift program ..."
   set -x
   swift-format -i *.swift
+}
+
+format_shell() {
+  echo "formating shell script ..."
+  set -x
+
+  shfmt -i 2 -w $@ *.sh
 }
 
 format_lua() {
@@ -41,11 +48,11 @@ format_lua() {
   COLUMN_WIDTH=80
 
   stylua -v ${PWD}/$@ \
-  --indent-type ${INDENT_TYPE} \
-  --indent-width ${INDENT_WIDTH} \
-  --quote-style ${QUOTE_STYLE} \
-  --call-parentheses ${CALL_PARENTHESES} \
-  --column-width ${COLUMN_WIDTH}
+    --indent-type ${INDENT_TYPE} \
+    --indent-width ${INDENT_WIDTH} \
+    --quote-style ${QUOTE_STYLE} \
+    --call-parentheses ${CALL_PARENTHESES} \
+    --column-width ${COLUMN_WIDTH}
 }
 
 # init
@@ -75,7 +82,7 @@ upload_github() {
   echo "uploading to github ..."
   set -x
 
-  DATE=`date '+%Y/%m/%d %H:%M'`
+  DATE=$(date '+%Y/%m/%d %H:%M')
   MESSAGE="committed on ${DATE}."
   SCRIPT_DIR=$(dirname $0)
 
