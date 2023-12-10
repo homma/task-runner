@@ -10,6 +10,7 @@ task_b() {
 build_swift() {
   echo "building swift program ..."
   set -x
+
   swiftc main.swift
 }
 
@@ -27,6 +28,7 @@ task_f() {
 format_swift() {
   echo "formating swift program ..."
   set -x
+
   swift-format -i *.swift
 }
 
